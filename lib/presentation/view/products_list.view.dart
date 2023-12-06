@@ -4,7 +4,6 @@ import 'package:snippet_coder_utils/ProgressHUD.dart';
 import 'package:sprout_test/app/config/color_constants.dart';
 import 'package:sprout_test/app/core/base/base.view.dart';
 import 'package:sprout_test/app/core/components/custom.appbar.dart';
-import 'package:sprout_test/app/core/routes/app_pages.dart';
 import 'package:sprout_test/presentation/controller/products_list.controller.dart';
 
 class ProductsListView extends BaseView<ProductsListController> {
@@ -26,12 +25,12 @@ class ProductsListView extends BaseView<ProductsListController> {
           ),
           body: ListView.builder(
             shrinkWrap: false,
-            itemCount: controller.title.length,
+            itemCount: controller.titles.length,
             itemBuilder: (context, index) {
               return ListTile(
-                title: Text(controller.title[index]),
+                title: Text(controller.titles[index]),
                 onTap: () {
-                  Get.toNamed(Routes.PRODUCTS_DETAILS_SCREEN);
+                  controller.getProductDetails(controller.productIds[index]);
                 },
               );
             },

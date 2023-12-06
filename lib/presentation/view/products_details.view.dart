@@ -1,17 +1,19 @@
+// ignore_for_file: prefer_const_constructors, prefer_const_literals_to_create_immutables
+
 import 'package:flutter/material.dart';
 import 'package:sprout_test/app/config/color_constants.dart';
 import 'package:sprout_test/app/core/base/base.view.dart';
 import 'package:sprout_test/app/core/components/custom.appbar.dart';
-import 'package:sprout_test/presentation/controller/products_details.controller.dart';
+import 'package:sprout_test/presentation/controller/products_list.controller.dart';
 
-class ProductsDetailsView extends BaseView<ProductsDetailsController> {
+class ProductsDetailsView extends BaseView<ProductsListController> {
   const ProductsDetailsView({super.key});
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: CustomAppbar(
-        appbarTitle: const Text('Products Details'),
+        appbarTitle: Text(controller.title.value),
         isTitleCenter: true,
         backgroundColor: AppColors.whiteColor,
         elevation: 0,
@@ -27,16 +29,16 @@ class ProductsDetailsView extends BaseView<ProductsDetailsController> {
           ),
         ),
       ),
-      body: const Padding(
+      body: Padding(
         padding: EdgeInsets.all(25.0),
         child: Column(
           children: [
             Image(
-              image: NetworkImage(
-                  'https://i.dummyjson.com/data/products/1/thumbnail.jpg'),
+              image: NetworkImage(controller.image.value),
             ),
             SizedBox(height: 30),
             Row(
+              crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(
                   'Description:',
@@ -46,7 +48,12 @@ class ProductsDetailsView extends BaseView<ProductsDetailsController> {
                   ),
                 ),
                 SizedBox(width: 10),
-                Text('31231312313'),
+                SizedBox(
+                  width: MediaQuery.of(context).size.width * 0.6,
+                  child: Text(
+                    controller.description.value,
+                  ),
+                ),
               ],
             ),
             SizedBox(height: 10),
@@ -60,7 +67,7 @@ class ProductsDetailsView extends BaseView<ProductsDetailsController> {
                   ),
                 ),
                 SizedBox(width: 10),
-                Text('11.1'),
+                Text(controller.price.toString()),
               ],
             ),
             SizedBox(height: 10),
@@ -74,7 +81,7 @@ class ProductsDetailsView extends BaseView<ProductsDetailsController> {
                   ),
                 ),
                 SizedBox(width: 10),
-                Text('11.1'),
+                Text(controller.discountPercentage.toString()),
               ],
             ),
           ],
