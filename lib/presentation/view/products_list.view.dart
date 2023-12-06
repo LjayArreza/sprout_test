@@ -35,6 +35,26 @@ class ProductsListView extends BaseView<ProductsListController> {
               );
             },
           ),
+          bottomNavigationBar: Padding(
+            padding: const EdgeInsets.all(20),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                ElevatedButton(
+                  onPressed: () {
+                    controller.getProductsListSkip(false);
+                  },
+                  child: const Text('Previous'),
+                ),
+                ElevatedButton(
+                  onPressed: () {
+                    controller.getProductsListSkip(true);
+                  },
+                  child: const Text('Next'),
+                ),
+              ],
+            ),
+          ),
         ),
       ),
     );

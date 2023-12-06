@@ -10,12 +10,12 @@ class ProductsRepository {
   final logger = Logger();
   ProductsRepository();
 
-  Future<dynamic> productsList(int limit) async {
+  Future<dynamic> productsList(int limit, int skip) async {
     httpService.init();
     try {
       var response = await httpService.request(
         url:
-            "${APIEndpoint.PRODUCTS}?limit=$limit&select=title,price,thumbnail,stock,discountPercentage",
+            "${APIEndpoint.PRODUCTS}?limit=$limit&select=title,price,thumbnail,stock,discountPercentage&skip=$skip",
         method: ApiMethod.GET,
       );
 

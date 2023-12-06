@@ -29,62 +29,64 @@ class ProductsDetailsView extends BaseView<ProductsListController> {
           ),
         ),
       ),
-      body: Padding(
-        padding: EdgeInsets.all(25.0),
-        child: Column(
-          children: [
-            Image(
-              image: NetworkImage(controller.image.value),
-            ),
-            SizedBox(height: 30),
-            Row(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Text(
-                  'Description:',
-                  style: TextStyle(
-                    fontStyle: FontStyle.normal,
-                    fontWeight: FontWeight.bold,
+      body: SingleChildScrollView(
+        child: Padding(
+          padding: EdgeInsets.all(25.0),
+          child: Column(
+            children: [
+              Image(
+                image: NetworkImage(controller.image.value),
+              ),
+              SizedBox(height: 30),
+              Row(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    'Description:',
+                    style: TextStyle(
+                      fontStyle: FontStyle.normal,
+                      fontWeight: FontWeight.bold,
+                    ),
                   ),
-                ),
-                SizedBox(width: 10),
-                SizedBox(
-                  width: MediaQuery.of(context).size.width * 0.6,
-                  child: Text(
-                    controller.description.value,
+                  SizedBox(width: 10),
+                  SizedBox(
+                    width: MediaQuery.of(context).size.width * 0.6,
+                    child: Text(
+                      controller.description.value,
+                    ),
                   ),
-                ),
-              ],
-            ),
-            SizedBox(height: 10),
-            Row(
-              children: [
-                Text(
-                  'Price:',
-                  style: TextStyle(
-                    fontStyle: FontStyle.normal,
-                    fontWeight: FontWeight.bold,
+                ],
+              ),
+              SizedBox(height: 10),
+              Row(
+                children: [
+                  Text(
+                    'Price:',
+                    style: TextStyle(
+                      fontStyle: FontStyle.normal,
+                      fontWeight: FontWeight.bold,
+                    ),
                   ),
-                ),
-                SizedBox(width: 10),
-                Text(controller.price.toString()),
-              ],
-            ),
-            SizedBox(height: 10),
-            Row(
-              children: [
-                Text(
-                  'Discount Percentage:',
-                  style: TextStyle(
-                    fontStyle: FontStyle.normal,
-                    fontWeight: FontWeight.bold,
+                  SizedBox(width: 10),
+                  Text(controller.price.toString()),
+                ],
+              ),
+              SizedBox(height: 10),
+              Row(
+                children: [
+                  Text(
+                    'Discount Percentage:',
+                    style: TextStyle(
+                      fontStyle: FontStyle.normal,
+                      fontWeight: FontWeight.bold,
+                    ),
                   ),
-                ),
-                SizedBox(width: 10),
-                Text(controller.discountPercentage.toString()),
-              ],
-            ),
-          ],
+                  SizedBox(width: 10),
+                  Text(controller.discountPercentage.toString()),
+                ],
+              ),
+            ],
+          ),
         ),
       ),
     );

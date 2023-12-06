@@ -1,5 +1,7 @@
 // ignore_for_file: invalid_use_of_protected_member
 
+import 'dart:math';
+
 import 'package:flutter/foundation.dart';
 import 'package:get/get.dart';
 import 'package:sprout_test/app/core/base/base.controller.dart';
@@ -21,6 +23,8 @@ class ProductsListController extends BaseController {
   var price = 0.obs;
   var image = ''.obs;
 
+  int skip = 0;
+
   ProductsRepository productsRepository;
   ProductsListController(this.productsRepository);
 
@@ -32,7 +36,37 @@ class ProductsListController extends BaseController {
 
   Future<void> getProductsList() async {
     isLoading.value = true;
-    var response = await productsRepository.productsList(10);
+    var response = await productsRepository.productsList(10, skip);
+
+    if (response is ProductsListResponse) {
+      isLoading.value = false;
+      products.value = response.products!;
+      titles.value = [];
+      thumb.value = [];
+      productIds.value = [];
+      for (var prod in products.value) {
+        titles.value.add(prod.title ?? "");
+        thumb.value.add(prod.thumbnail ?? "");
+        productIds.value.add(prod.id ?? 0);
+      }
+    } else {
+      isLoading.value = false;
+      debugPrint('ERROR LOADING RESPONSE');
+    }
+  }
+
+  Future<void> getProductsListSkip(bool isNext) async {
+    isLoading.value = true;
+    if (isNext) {
+      skip += 10;
+    } else {
+      skip = max(
+        0,
+        skip - 10,
+      );
+    }
+
+    var response = await productsRepository.productsList(10, skip);
 
     if (response is ProductsListResponse) {
       isLoading.value = false;
